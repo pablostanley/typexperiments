@@ -66,7 +66,7 @@ export function computeGlyphPositions(
           y,
           width: charWidth,
           lineIndex: lineIdx,
-          segmentIndex: 0, // not meaningful at char level
+          segmentIndex: 0,
         })
       }
 

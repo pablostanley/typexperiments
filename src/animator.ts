@@ -75,19 +75,6 @@ export class Animator {
     }
   }
 
-  // Render a single frame at a specific t (for interactive morph)
-  renderAt(t: number) {
-    const now = performance.now()
-    const glyphs = effects[this.currentEffect](
-      this.fromGlyphs,
-      this.toGlyphs,
-      t,
-      now,
-      this.params,
-    )
-    this.draw(glyphs)
-  }
-
   // Render the "to" state as-is (static display)
   renderStatic() {
     const glyphs: AnimatedGlyph[] = this.toGlyphs.map(g => ({

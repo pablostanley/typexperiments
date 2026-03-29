@@ -14,8 +14,10 @@ export class Renderer {
   resize() {
     this.dpr = window.devicePixelRatio || 1
     const rect = this.canvas.getBoundingClientRect()
-    this.canvas.width = rect.width * this.dpr
-    this.canvas.height = rect.height * this.dpr
+    const w = Math.max(1, rect.width)
+    const h = Math.max(1, rect.height)
+    this.canvas.width = w * this.dpr
+    this.canvas.height = h * this.dpr
     this.ctx.scale(this.dpr, this.dpr)
   }
 
