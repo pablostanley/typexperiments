@@ -234,15 +234,21 @@ function reprepareAndAnimate() {
   recomputeAndAnimate()
 }
 
+let morphFlip = false
+
 function playCurrentEffect() {
   if (!prepared) return
   const activeBtn = effectGrid.querySelector('.effect-btn.active') as HTMLElement
   const effect = (activeBtn?.dataset.effect ?? 'morph') as EffectName
 
   if (effect === 'morph') {
-    // Morph between previous width and current width
-    const fromGlyphs = computePositions(prevLayoutWidth)
-    const toGlyphs = computePositions(layoutWidth)
+    // Toggle between narrow and current width so replay always shows movement
+    const narrowWidth = Math.max(100, Math.round(layoutWidth * 0.45))
+    const widthA = morphFlip ? layoutWidth : narrowWidth
+    const widthB = morphFlip ? narrowWidth : layoutWidth
+    morphFlip = !morphFlip
+    const fromGlyphs = computePositions(widthA)
+    const toGlyphs = computePositions(widthB)
     animator.setGlyphs(fromGlyphs, toGlyphs)
   } else {
     // Other effects: animate into the current layout
